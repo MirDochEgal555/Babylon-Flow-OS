@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090a0d" />
+  <title>Babylon Flow™ — Trip OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div><div class="scanline"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Babylon Flow home"><span class="brand-mark">B</span><span>BABYLON<br>FLOW<span class="tm">™</span></span></a>
+    <div class="trip-meta"><span class="live-dot"></span> ESPAÑA 2026 <b>·</b> DAY 33</div>
+    <button class="admin-button" id="adminButton">ADMIN <span>↗</span></button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> LIVE TRIP INTELLIGENCE</div>
+      <h1>MAKE BAD<br><em>DECISIONS</em><br>LEGENDARY.</h1>
+      <div class="hero-bottom">
+        <p>The unofficial operating system for a group trip with absolutely no operational discipline.</p>
+        <div class="system-status"><span>SYS.STATUS</span><strong>NOMINALLY<br>FUNCTIONAL</strong></div>
+      </div>
+    </section>
+
+    <nav class="actions" aria-label="Primary actions">
+      <button class="action-card event" data-open="event"><span class="action-icon">✦</span><span><b>LOG EVENT</b><small>Something happened.</small></span><i>01</i></button>
+      <button class="action-card quest" data-open="quest"><span class="action-icon">⌁</span><span><b>SIDE QUEST</b><small>Cause mild lore.</small></span><i>02</i></button>
+      <button class="action-card court" data-open="court"><span class="action-icon">⚖</span><span><b>BABYLON COURT</b><small>Settle absolutely nothing.</small></span><i>03</i></button>
+      <button class="action-card quote" data-open="quote"><span class="action-icon">“</span><span><b>LOG QUOTE</b><small>Archive the evidence.</small></span><i>04</i></button>
+    </nav>
+
+    <section class="ticker" aria-label="Market update"><span class="ticker-label">BFSE</span><div id="tickerContent">MARKETS OPEN — WAGGERBAGGER ▼ 8.4% AFTER UNEXPLAINED ABSENCE · P TO THE K ▲ 11.7% ON DJ GUIDANCE</div><span class="ticker-end">LIVE</span></section>
+
+    <section class="section-heading"><div><span class="index">01 /</span><h2>ACTIVE ASSETS</h2></div><button class="text-button" id="viewAll">VIEW ROSTER <span>→</span></button></section>
+    <section class="people-grid" id="peopleGrid"></section>
+
+    <section class="intel-grid">
+      <div class="section-heading compact"><div><span class="index">02 /</span><h2>MARKET PULSE</h2></div><span class="micro-label">FAKE / REAL FEELINGS</span></div>
+      <section class="market-card" id="marketCard"></section>
+    </section>
+
+    <section class="section-heading timeline-heading"><div><span class="index">03 /</span><h2>INCIDENT FEED</h2></div><button class="text-button" id="clearData">RESET DEMO</button></section>
+    <section class="timeline" id="timeline"></section>
+  </main>
+
+  <footer><span>BABYLON FLOW™</span> — SPAIN 2026 <i>THE DATA SUGGESTS THIS SHOULD NOT HAVE WORKED.</i></footer>
+
+  <div class="modal-backdrop" id="backdrop"></div>
+  <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+    <div id="modalBody"></div>
+  </section>
+  <div class="toast" id="toast"></div>
+  <script src="data.js"></script><script src="app.js"></script>
+</body>
+</html>
