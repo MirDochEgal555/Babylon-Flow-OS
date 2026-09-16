@@ -13,9 +13,13 @@ checked-in `BABYLON_ARCHIVE` in `data.js` is the canonical deployment ledger;
 add forwarded email reports there before the next GitHub Pages deployment so
 they become the shared baseline for everybody.
 
+## Change requests by email
+
+Anyone can use **REQUEST A CHANGE** beneath Active Assets, the request action in an individual person profile, or **REQUEST A STOCK CHANGE** in the Trip Stock Exchange. The short form emails a proposed person-stat or share-price change—with supporting evidence—to Babylon HQ. It deliberately does **not** update the shared ledger automatically, so a reviewer can verify the request before adding it to `data.js` and deploying.
+
 ## Email delivery
 
-Every visitor who logs an event or quote triggers an email to `rogee.oc@gmail.com`. This works from any deployed HTTP(S) site—there is no localhost restriction in the app. The email is a field report/notification, not a direct database write; forward it here and it can be verified and committed into the canonical ledger.
+Every visitor who logs an event, quote, or change request triggers an email to `rogee.oc@gmail.com`. This works from any deployed HTTP(S) site—there is no localhost restriction in the app. The email is a field report/notification, not a direct database write; forward it here and it can be verified and committed into the canonical ledger.
 
 The site must be served by a web server. Opening `index.html` directly as a `file://` URL prevents the email provider from accepting submissions. For local preview only:
 
