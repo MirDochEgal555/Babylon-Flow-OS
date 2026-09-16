@@ -25,13 +25,16 @@ async function emailLog(kind, details) {
     })
   });
   const result = await response.json().catch(() => ({}));
-  if (!response.ok || result.success === false) throw new Error(result.message || 'Email could not be sent');
-  return result;
+  const needsActivation = /activat|confirm/i.test(result.message || '');
+  if (!response.ok || ((result.success === false || result.success === 'false') && !needsActivation)) {
+    throw new Error(result.message || 'Email could not be sent');
+  }
+  return { ...result, needsActivation };
 }
 
 function notifyLog(kind, details) {
   emailLog(kind, details)
-    .then(result => toast(/activat|confirm/i.test(result.message || '')
+    .then(result => toast(result.needsActivation
       ? 'LOGGED · CHECK EMAIL TO ACTIVATE DELIVERY'
       : 'LOGGED · EMAIL SENT'))
     .catch(() => toast('LOGGED LOCALLY · EMAIL NOT SENT'));
