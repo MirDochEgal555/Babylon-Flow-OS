@@ -34,6 +34,7 @@ let activeModal = null;
 const $ = (s) => document.querySelector(s);
 const initials = (name) => name.split(' ').map(x => x[0]).join('').slice(0,2);
 const title = (id) => people.find(p => p.id === id)?.alias || id;
+const personStatus = (person) => person.status === 'inactive' ? 'inactive' : 'active';
 const ACCESS_PHRASE = 'babylon2026';
 const LOG_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/rogee.oc@gmail.com';
 
@@ -82,6 +83,7 @@ function setupAccessGate() {
 function renderPeople() {
   $('#peopleGrid').innerHTML = people.map(p => `
     <article class="person-card" style="--person:var(--${p.accent})" data-person="${p.id}" title="Open ${p.name}'s asset profile">
+      <span class="person-status ${personStatus(p)}">${personStatus(p)}</span>
       <div class="avatar">${initials(p.alias)}</div><span class="animal">${p.animal} CLASS</span>
       <h3>${p.alias}</h3><div class="name">${p.name.toUpperCase()} · €${p.stock.toFixed(1)}</div>
       <div class="bars">
