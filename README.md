@@ -13,6 +13,9 @@ checked-in `BABYLON_ARCHIVE` in `data.js` is the canonical deployment ledger;
 add forwarded email reports there before the next GitHub Pages deployment so
 they become the shared baseline for everybody.
 
+The exact review and publication procedure is in
+[HQ_REVIEW_WORKFLOW.md](HQ_REVIEW_WORKFLOW.md).
+
 ## Change requests by email
 
 Anyone can use **REQUEST A CHANGE** beneath Active Assets, the request action in an individual person profile, or **REQUEST A STOCK CHANGE** in the Trip Stock Exchange. The short form emails a proposed person-stat or share-price change—with supporting evidence—to Babylon HQ. It deliberately does **not** update the shared ledger automatically, so a reviewer can verify the request before adding it to `data.js` and deploying.
@@ -28,3 +31,10 @@ python3 -m http.server 8000
 ```
 
 Then open [http://localhost:8000](http://localhost:8000). For production, deploy these static files to any host (such as GitHub Pages, Netlify, or Vercel). The recipient needs to activate the FormSubmit email link once; after that, logs from all visitors are emailed automatically.
+
+## Data handling
+
+The access phrase is a social gate, not security. Submitted field reports are
+sent to Babylon HQ through the configured email service, and browser archives
+remain on the visitor's device until they are exported or HQ publishes verified
+entries. Do not submit sensitive personal information.
