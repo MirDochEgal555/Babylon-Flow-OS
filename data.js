@@ -69,5 +69,21 @@ const BABYLON_DUOS = [
 ];
 
 const BABYLON_NPCS = [
-  { id: 'npc-seed-1', nickname: 'The Pool Diplomat', nationality: 'GERMAN / UNCONFIRMED', where: 'JÁVEA HQ', danger: 'MEDIUM / UNPREDICTABLE', lore: 'Appeared during international relations and somehow knew everybody’s drink order.', quest: 'Locate the diplomatic delegation.', odds: '27% / SAME BAR THEORY' }
+  { id: 'npc-seed-1', nickname: 'The Pool Boy', nationality: 'GERMAN / 60 YEARS OLD', where: 'JÁVEA HQ POOL', danger: 'LOW / EARLY SHIFT', lore: 'Cleans the pool every Tuesday and Saturday before sunrise. Nobody has seen him because everyone is still asleep.', quest: 'Wake up early enough to verify the legend.', odds: '100% / TUESDAY + SATURDAY' }
 ];
+
+// Checked-in master record. This is deliberately separate from the browser
+// archive: it is the portable baseline we update when an emailed field report
+// is added to the project.
+const BABYLON_ARCHIVE = {
+  schemaVersion: 1,
+  updatedAt: '2026-09-16T00:00:00.000Z',
+  source: 'BABYLON FLOW / CANONICAL LEDGER',
+  people: BABYLON_PEOPLE,
+  events: BABYLON_EVENTS,
+  quotes: BABYLON_QUOTES,
+  npcs: BABYLON_NPCS,
+  morningReports: [],
+  duoHistory: [],
+  auditLog: []
+};
