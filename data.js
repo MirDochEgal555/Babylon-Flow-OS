@@ -5,7 +5,13 @@ const BABYLON_PEOPLE = [
   { id: 'tibi', name: 'Tibi', alias: 'TIBI', animal: 'DOG', accent: 'orange', stock: 141.8, stats: { aura: 74, reliability: 47, spanish: 48, chaos: 79, fiscal: 39, ibiza: 82, appeal: 68, xp: 930 } },
   { id: 'luisa', name: 'Luisa', alias: 'LUUL', animal: 'STAR', accent: 'blue', stock: 111.3, stats: { aura: 73, reliability: 71, spanish: 62, chaos: 51, fiscal: 66, ibiza: 68, appeal: 74, xp: 650 } },
   { id: 'sven', name: 'Sven', alias: 'WAGGERBAGGER', animal: 'ELEPHANT', accent: 'yellow', stock: 84.6, stats: { aura: 59, reliability: 38, spanish: 36, chaos: 86, fiscal: 31, ibiza: 75, appeal: 57, xp: 890 } },
-  { id: 'robin', name: 'Robin', alias: 'ROGER', animal: 'LION', accent: 'red', stock: 107.9, stats: { aura: 77, reliability: 51, spanish: 57, chaos: 72, fiscal: 45, ibiza: 80, appeal: 82, xp: 810 } }
+  { id: 'robin', name: 'Robin', alias: 'ROGER', animal: 'LION', accent: 'red', stock: 107.9, stats: { aura: 77, reliability: 51, spanish: 57, chaos: 72, fiscal: 45, ibiza: 80, appeal: 82, xp: 810 } },
+  { id: 'marvin', name: 'Marvin', alias: 'MARVIN', animal: 'UNCLASSIFIED', accent: 'blue', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
+  { id: 'ruben', name: 'Ruben', alias: 'RUBEN', animal: 'UNCLASSIFIED', accent: 'pink', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
+  { id: 'jan', name: 'Jan', alias: 'JAN', animal: 'UNCLASSIFIED', accent: 'orange', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
+  { id: 'nico', name: 'Nico', alias: 'NICO', animal: 'UNCLASSIFIED', accent: 'lime', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
+  { id: 'taeyong', name: 'Taeyong', alias: 'TAEYONG', animal: 'UNCLASSIFIED', accent: 'blue', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
+  { id: 'naehwan', name: 'Naehwan', alias: 'NAEHWAN', animal: 'UNCLASSIFIED', accent: 'pink', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } }
 ];
 
 const BABYLON_EVENTS = [

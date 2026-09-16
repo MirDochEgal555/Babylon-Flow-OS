@@ -12,9 +12,10 @@ const archiveDB = {
   async set(value) { const db = await this.open(); return new Promise((resolve, reject) => { const request = db.transaction('archive', 'readwrite').objectStore('archive').put(value, ARCHIVE_KEY); request.onsuccess = () => resolve(); request.onerror = () => reject(request.error); }); }
 };
 let people = [], events = [], quotes = [], npcs = [], morningReports = [], duoHistory = [], auditLog = [];
+let rosterFilter = 'active';
 let archiveReady = false;
 function currentArchive() { return { schemaVersion: BABYLON_ARCHIVE.schemaVersion, updatedAt: new Date().toISOString(), source: BABYLON_ARCHIVE.source, people, events, quotes, npcs, morningReports, duoHistory, auditLog }; }
-function applyArchive(data) { const fallback = canonicalArchive(); people = data.people || fallback.people; events = data.events || fallback.events; quotes = data.quotes || fallback.quotes; npcs = data.npcs || fallback.npcs; morningReports = data.morningReports || []; duoHistory = data.duoHistory || []; auditLog = data.auditLog || []; }
+function applyArchive(data) { const fallback = canonicalArchive(); const savedPeople = data.people || fallback.people; people = [...fallback.people.map(person => ({ ...person, ...(savedPeople.find(saved => saved.id === person.id) || {}) })), ...savedPeople.filter(saved => !fallback.people.some(person => person.id === saved.id))]; events = data.events || fallback.events; quotes = data.quotes || fallback.quotes; npcs = data.npcs || fallback.npcs; morningReports = data.morningReports || []; duoHistory = data.duoHistory || []; auditLog = data.auditLog || []; }
 function addAudit(action, detail = '') { auditLog.unshift({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, at: new Date().toISOString(), action, detail }); auditLog = auditLog.slice(0, 500); }
 async function loadArchive() {
   let archive;
@@ -35,6 +36,7 @@ const $ = (s) => document.querySelector(s);
 const initials = (name) => name.split(' ').map(x => x[0]).join('').slice(0,2);
 const title = (id) => people.find(p => p.id === id)?.alias || id;
 const personStatus = (person) => person.status === 'inactive' ? 'inactive' : 'active';
+const activePeople = () => people.filter(person => personStatus(person) === 'active');
 const ACCESS_PHRASE = 'babylon2026';
 const LOG_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/rogee.oc@gmail.com';
 
@@ -81,7 +83,10 @@ function setupAccessGate() {
 }
 
 function renderPeople() {
-  $('#peopleGrid').innerHTML = people.map(p => `
+  const rosterPeople = people.filter(person => personStatus(person) === rosterFilter);
+  $('#rosterTitle').textContent = `${rosterFilter.toUpperCase()} ASSETS`;
+  $('#viewAll').innerHTML = rosterFilter === 'active' ? 'VIEW INACTIVE <span>→</span>' : 'VIEW ACTIVE <span>→</span>';
+  $('#peopleGrid').innerHTML = rosterPeople.map(p => `
     <article class="person-card" style="--person:var(--${p.accent})" data-person="${p.id}" title="Open ${p.name}'s asset profile">
       <span class="person-status ${personStatus(p)}">${personStatus(p)}</span>
       <div class="avatar">${initials(p.alias)}</div><span class="animal">${p.animal} CLASS</span>
@@ -94,7 +99,8 @@ function renderPeople() {
 }
 function statBar(label, value) { return `<div><div class="bar-label"><span>${label}</span><span>${value}</span></div><div class="bar"><span style="width:${Math.min(value,100)}%"></span></div></div>`; }
 function renderMarket() {
-  const best = [...people].sort((a,b) => b.stock-a.stock)[0], chaos = [...people].sort((a,b)=>b.stats.chaos-a.stats.chaos)[0];
+  const active = activePeople();
+  const best = [...active].sort((a,b) => b.stock-a.stock)[0], chaos = [...active].sort((a,b)=>b.stats.chaos-a.stats.chaos)[0];
   $('#marketCard').innerHTML = `<div class="market-main"><span class="micro-label">AFTER-HOURS BRIEFING</span><p><strong class="up">${best.alias} ▲ 11.7%</strong><br>Strong DJ guidance and unexpectedly competent Spanish have driven an upgrade in investor confidence.</p></div><div class="market-stats"><div><span class="micro-label">TOP ASSET</span><b>${best.alias}</b></div><div><span class="micro-label">CHAOS INDEX</span><b>${chaos.stats.chaos}/100</b></div><div><span class="micro-label">SHOE RESERVE</span><b>02</b></div></div>`;
 }
 function renderTimeline() {
@@ -159,7 +165,7 @@ function wrappedModal() { const liability=[...people].sort((a,b)=>b.stats.chaos-
 
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>({event:eventModal,quote:quoteModal,quest:questModal,court:courtModal,wheel:wheelModal,exchange:exchangeModal,npc:npcModal,var:varModal,lore:loreModal,duo:duoModal,morning:morningModal,wrapped:wrappedModal}[b.dataset.open]()));
 $('#closeModal').onclick=closeModal; $('#backdrop').onclick=closeModal; document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-$('#viewAll').onclick=()=>{ document.querySelector('.people-grid').scrollIntoView({behavior:'smooth',block:'start'}); toast('ALL 7 ACTIVE ASSETS DISPLAYED'); };
+$('#viewAll').onclick=()=>{ rosterFilter = rosterFilter === 'active' ? 'inactive' : 'active'; renderPeople(); document.querySelector('.people-grid').scrollIntoView({behavior:'smooth',block:'start'}); toast(`${rosterFilter.toUpperCase()} ROSTER DISPLAYED`); };
 $('#requestChange').onclick=()=>changeRequestModal();
 function archiveModal() {
   openModal(`<h2 id="modalTitle">ARCHIVE CONTROL</h2><p class="lede">This device keeps an IndexedDB master archive. Export a backup after meaningful lore; import restores a previously exported archive.</p><div class="quest-card"><span class="micro-label">ARCHIVE STATUS</span><h3>${events.length} INCIDENTS · ${quotes.length} QUOTES</h3><p class="lede" style="margin:8px 0 0">${npcs.length} NPCS · ${morningReports.length} TESTIMONIES · ${auditLog.length} AUDIT ENTRIES</p></div><div class="quest-actions" style="margin-top:14px"><button class="secondary-button" id="exportArchive">EXPORT JSON</button><label class="secondary-button" style="display:grid;place-items:center;padding:12px">IMPORT JSON<input id="importArchive" type="file" accept="application/json" hidden></label></div><p class="lede" style="margin-top:18px">Forward incoming Babylon emails here and I’ll add them to the checked-in canonical ledger for the next deployment.</p>`, 'archive');
