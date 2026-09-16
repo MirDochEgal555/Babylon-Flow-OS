@@ -38,3 +38,36 @@ const COURT_SENTENCES = [
   'Become responsible for the next group photo.',
   'Let the group select your next non-alcoholic snack.'
 ];
+
+const BABYLON_WHEEL = [
+  { text: 'ORDER FOR SOMEONE ELSE — no consultation, no mercy.' },
+  { text: 'SPEAK ONLY SPANISH FOR 30 MINUTES.' },
+  { text: 'CHOOSE THE NEXT DESTINATION. The group must obey.' },
+  { text: 'WEAR SOMEONE ELSE’S SHIRT FOR THE NEXT LOCATION.' },
+  { text: 'GIVE A STRANGER A 30-SECOND BABYLON SALES PITCH.' },
+  { text: 'BECOME GROUP PHOTOGRAPHER UNTIL FURTHER NOTICE.' },
+  { text: 'CREATE A NEW TOAST. Everyone must use it once.' },
+  { text: 'TRADE ONE ACCESSORY WITH THE PERSON TO YOUR LEFT.' },
+  { text: 'YOU ARE NAVIGATION. No maps, only confidence.', legendary: true },
+  { text: 'LEGENDARY: DECLARE A HISTORICAL INCIDENT AND MAKE THE SPEECH.', legendary: true }
+];
+
+const BABYLON_HEADLINES = [
+  'P TO THE K upgraded after confident Spanish interaction; analysts question methodology.',
+  'WAGGERBAGGER shares slide on renewed wallet-security concerns.',
+  'LUUL holds steady as board praises “quietly elite logistics.”',
+  'TIBI volatility rises; investors urged to keep a safe distance from the aux cord.',
+  'ROGER gains on late-night resilience despite deteriorating sleep fundamentals.'
+];
+
+const BABYLON_DUOS = [
+  'Find the best local snack under €6 and deliver an investor-grade tasting report.',
+  'Get a photo with something that looks like it has its own lore.',
+  'Create a two-person entrance and deploy it at the next venue.',
+  'Ask one local for a recommendation, then follow it without group-chat interference.',
+  'Return with a verified piece of evidence that the group was here.'
+];
+
+const BABYLON_NPCS = [
+  { id: 'npc-seed-1', nickname: 'The Pool Diplomat', nationality: 'GERMAN / UNCONFIRMED', where: 'JÁVEA HQ', danger: 'MEDIUM / UNPREDICTABLE', lore: 'Appeared during international relations and somehow knew everybody’s drink order.', quest: 'Locate the diplomatic delegation.', odds: '27% / SAME BAR THEORY' }
+];
