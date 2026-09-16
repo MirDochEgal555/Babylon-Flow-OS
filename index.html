@@ -11,6 +11,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <section class="access-gate" id="accessGate" aria-labelledby="gateTitle">
+    <div class="gate-grid"></div>
+    <div class="gate-content">
+      <div class="gate-mark">B</div>
+      <span class="eyebrow"><span class="pulse"></span> RESTRICTED TRIP INTELLIGENCE</span>
+      <h1 id="gateTitle">BABYLON<br><em>FLOW</em></h1>
+      <p>This system contains sensitive operational lore. Enter the access phrase to continue.</p>
+      <form id="gateForm" class="gate-form">
+        <label for="accessPassword">ACCESS PHRASE</label>
+        <div><input id="accessPassword" type="password" autocomplete="current-password" placeholder="••••••••••" required /><button>ENTER →</button></div>
+        <small id="gateError" role="alert"></small>
+      </form>
+      <span class="gate-footer">BABYLON FLOW™ / ESPAÑA 2026 / UNOFFICIAL</span>
+    </div>
+  </section>
   <div class="noise"></div><div class="scanline"></div>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Babylon Flow home"><span class="brand-mark">B</span><span>BABYLON<br>FLOW<span class="tm">™</span></span></a>

@@ -10,6 +10,22 @@ let activeModal = null;
 const $ = (s) => document.querySelector(s);
 const initials = (name) => name.split(' ').map(x => x[0]).join('').slice(0,2);
 const title = (id) => people.find(p => p.id === id)?.alias || id;
+const ACCESS_PHRASE = 'babylon2026';
+
+function setupAccessGate() {
+  const gate = $('#accessGate');
+  if (sessionStorage.getItem('babylon-access') === 'granted') { gate.classList.add('unlocked'); return; }
+  $('#gateForm').onsubmit = event => {
+    event.preventDefault();
+    if ($('#accessPassword').value === ACCESS_PHRASE) {
+      sessionStorage.setItem('babylon-access', 'granted');
+      gate.classList.add('unlocked');
+    } else {
+      $('#gateError').textContent = 'ACCESS DENIED — CHECK THE PHRASE.';
+      $('#accessPassword').select();
+    }
+  };
+}
 
 function renderPeople() {
   $('#peopleGrid').innerHTML = people.map(p => `
@@ -58,3 +74,4 @@ $('#viewAll').onclick=()=>{ document.querySelector('.people-grid').scrollIntoVie
 $('#adminButton').onclick=()=>toast('ADMIN MODE · LOCAL DEVICE AUTHORITY');
 $('#clearData').onclick=()=>{if(confirm('Reset all locally logged events and quotes?')){localStorage.removeItem('babylon-people');localStorage.removeItem('babylon-events');localStorage.removeItem('babylon-quotes');people=BABYLON_PEOPLE.map(x=>({...x,stats:{...x.stats}}));events=[...BABYLON_EVENTS];quotes=[...BABYLON_QUOTES];save();toast('DEMO DATA RESTORED');}};
 renderPeople();renderMarket();renderTimeline();
+setupAccessGate();
