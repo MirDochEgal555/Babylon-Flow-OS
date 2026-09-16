@@ -11,6 +11,31 @@ const $ = (s) => document.querySelector(s);
 const initials = (name) => name.split(' ').map(x => x[0]).join('').slice(0,2);
 const title = (id) => people.find(p => p.id === id)?.alias || id;
 const ACCESS_PHRASE = 'babylon2026';
+const LOG_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/rogee.oc@gmail.com';
+
+async function emailLog(kind, details) {
+  const response = await fetch(LOG_EMAIL_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      _subject: `Babylon Flow — ${kind}`,
+      'Log type': kind,
+      'Logged at': new Date().toLocaleString(),
+      ...details
+    })
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || result.success === false) throw new Error(result.message || 'Email could not be sent');
+  return result;
+}
+
+function notifyLog(kind, details) {
+  emailLog(kind, details)
+    .then(result => toast(/activat|confirm/i.test(result.message || '')
+      ? 'LOGGED · CHECK EMAIL TO ACTIVATE DELIVERY'
+      : 'LOGGED · EMAIL SENT'))
+    .catch(() => toast('LOGGED LOCALLY · EMAIL NOT SENT'));
+}
 
 function setupAccessGate() {
   const gate = $('#accessGate');
@@ -53,10 +78,10 @@ function toast(message) { const t = $('#toast'); t.textContent = message; t.clas
 const peopleOptions = (multiple=false) => people.map(p=>`<option value="${p.id}">${p.alias} — ${p.name}</option>`).join('');
 
 function eventModal() { openModal(`<h2 id="modalTitle">LOG EVENT</h2><p class="lede">Create a permanent record of an operational incident.</p><form id="eventForm"><div class="form-grid"><div><label>PEOPLE INVOLVED</label><select name="person">${peopleOptions()}</select></div><div><label>CATEGORY</label><select name="category"><option>RANDOM LORE</option><option>PARTY</option><option>CLUB</option><option>BEACH</option><option>FOOD</option><option>SPORT</option><option>LEGENDARY</option></select></div><div class="full"><label>INCIDENT TITLE</label><input required name="title" autocomplete="off" placeholder="The Supermarket Incident" maxlength="55"></div><div class="full"><label>WHAT HAPPENED</label><textarea name="description" required placeholder="Keep it brief. The timeline is watching." maxlength="180"></textarea></div><div><label>LOCATION</label><input name="location" placeholder="JÁVEA HQ" maxlength="30"></div><div><label>XP AWARD</label><select name="xp"><option value="25">+25 XP</option><option value="50" selected>+50 XP</option><option value="100">+100 XP</option><option value="150">+150 XP</option></select></div></div><button class="submit-button">COMMIT TO THE ARCHIVE →</button></form>`, 'event');
-  $('#eventForm').onsubmit = e => { e.preventDefault(); const d = new FormData(e.target), xp=+d.get('xp'), p=people.find(x=>x.id===d.get('person')); p.stats.xp += xp; p.stock = +(p.stock * (1 + (Math.random()*.06-.015))).toFixed(1); events.unshift({ id:Date.now(), type:d.get('category'), title:d.get('title'), description:d.get('description'), location:(d.get('location')||'FIELD UNKNOWN').toUpperCase(), people:[p.id], time:'JUST NOW', change:`+${xp} XP`}); save(); closeModal(); toast('INCIDENT LOGGED · ARCHIVE UPDATED'); };
+  $('#eventForm').onsubmit = e => { e.preventDefault(); const d = new FormData(e.target), xp=+d.get('xp'), p=people.find(x=>x.id===d.get('person')), location=(d.get('location')||'FIELD UNKNOWN').toUpperCase(); p.stats.xp += xp; p.stock = +(p.stock * (1 + (Math.random()*.06-.015))).toFixed(1); events.unshift({ id:Date.now(), type:d.get('category'), title:d.get('title'), description:d.get('description'), location, people:[p.id], time:'JUST NOW', change:`+${xp} XP`}); save(); closeModal(); notifyLog('Event logged', { 'Person involved': p.alias, Category: d.get('category'), Title: d.get('title'), 'What happened': d.get('description'), Location: location, 'XP award': `+${xp} XP` }); };
 }
 function quoteModal() { openModal(`<h2 id="modalTitle">LOG QUOTE</h2><p class="lede">The evidentiary archive has no context limit. You should.</p><form id="quoteForm"><div class="form-grid"><div class="full"><label>THE QUOTE</label><textarea required name="quote" placeholder="A sentence future generations will misunderstand." maxlength="180"></textarea></div><div><label>SPEAKER</label><select name="speaker">${peopleOptions()}<option value="UNKNOWN">UNKNOWN ENTITY</option></select></div><div><label>CONTEXT</label><input name="context" placeholder="e.g. 04:00 taxi debate" maxlength="45"></div></div><button class="submit-button">SEAL THE EVIDENCE →</button></form>`, 'quote');
-  $('#quoteForm').onsubmit = e => { e.preventDefault(); const d=new FormData(e.target), speaker=title(d.get('speaker')); quotes.unshift({id:Date.now(), quote:d.get('quote'),speaker,context:d.get('context'),time:'JUST NOW'}); events.unshift({id:Date.now()+1,type:'QUOTE',title:`“${d.get('quote').slice(0,48)}${d.get('quote').length>48?'…':''}”`,description:`Entered into evidence by ${speaker}${d.get('context') ? ` · ${d.get('context')}` : ''}.`,location:'QUOTE ARCHIVE',time:'JUST NOW',change:'RECORDED'}); save(); closeModal(); toast('QUOTE SEALED · NO CONTEXT REQUIRED'); };
+  $('#quoteForm').onsubmit = e => { e.preventDefault(); const d=new FormData(e.target), speaker=title(d.get('speaker')), context=d.get('context'); quotes.unshift({id:Date.now(), quote:d.get('quote'),speaker,context,time:'JUST NOW'}); events.unshift({id:Date.now()+1,type:'QUOTE',title:`“${d.get('quote').slice(0,48)}${d.get('quote').length>48?'…':''}”`,description:`Entered into evidence by ${speaker}${context ? ` · ${context}` : ''}.`,location:'QUOTE ARCHIVE',time:'JUST NOW',change:'RECORDED'}); save(); closeModal(); notifyLog('Quote logged', { Speaker: speaker, Quote: d.get('quote'), Context: context || 'Not supplied' }); };
 }
 function questModal(quest = BABYLON_QUESTS[Math.floor(Math.random()*BABYLON_QUESTS.length)]) { openModal(`<h2 id="modalTitle">SIDE QUEST</h2><p class="lede">Optional mission. Mandatory lore potential.</p><div class="quest-card"><span class="rarity">${quest.rarity} ASSIGNMENT</span><h3>${quest.mission}</h3><div class="quest-details"><span>LOCATION <b>${quest.place}</b></span><span>REWARD <b>+${quest.xp} XP</b></span></div></div><div class="quest-actions"><button class="secondary-button" id="reroll">REROLL</button><button class="submit-button" id="completeQuest">COMPLETE QUEST</button></div>`, 'quest');
   $('#reroll').onclick=()=>questModal(); $('#completeQuest').onclick=()=>{ const p=people[Math.floor(Math.random()*people.length)];p.stats.xp+=quest.xp;events.unshift({id:Date.now(),type:'SIDE QUEST',title:'Side quest completed',description:`${p.alias} completed the mission: ${quest.mission}`,location:quest.place,time:'JUST NOW',change:`+${quest.xp} XP`});save();closeModal();toast(`QUEST COMPLETE · ${p.alias} +${quest.xp} XP`);};
