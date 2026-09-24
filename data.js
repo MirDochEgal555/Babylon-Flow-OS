@@ -1,6 +1,6 @@
 const BABYLON_PEOPLE = [
-  { id: 'philipp', name: 'Philipp', alias: 'P TO THE K', animal: 'CAT', accent: 'lime', stock: 128.4, stats: { aura: 72, reliability: 63, spanish: 66, chaos: 57, fiscal: 42, ibiza: 78, appeal: 71, xp: 840 } },
-  { id: 'ainhoa', name: 'Ainhoa', alias: 'AINHOA', animal: 'BEER', accent: 'pink', stock: 119.7, stats: { aura: 76, reliability: 68, spanish: 98, chaos: 54, fiscal: 61, ibiza: 71, appeal: 75, xp: 720 } },
+  { id: 'philipp', name: 'Philipp', alias: 'P TO THE K', animal: 'CAT', accent: 'lime', stock: 128.4, stats: { aura: 72, reliability: 63, spanish: 66, chaos: 57, fiscal: 42, ibiza: 78, appeal: 71, xp: 890 } },
+  { id: 'ainhoa', name: 'Ainhoa', alias: 'AINHOA', animal: 'BEER', accent: 'pink', stock: 119.7, stats: { aura: 76, reliability: 68, spanish: 98, chaos: 54, fiscal: 61, ibiza: 71, appeal: 75, xp: 770 } },
   { id: 'nerea', name: 'Nerea', alias: 'NEREA', animal: 'NIGHT OWL', accent: 'violet', stock: 96.2, stats: { aura: 70, reliability: 54, spanish: 94, chaos: 68, fiscal: 56, ibiza: 74, appeal: 73, xp: 690 } },
   { id: 'tibi', name: 'Tibi', alias: 'TIBI', animal: 'DOG', accent: 'orange', stock: 141.8, stats: { aura: 74, reliability: 47, spanish: 48, chaos: 79, fiscal: 39, ibiza: 82, appeal: 68, xp: 930 } },
   { id: 'luisa', name: 'Luisa', alias: 'LUUL', animal: 'STAR', accent: 'blue', stock: 111.3, stats: { aura: 73, reliability: 71, spanish: 62, chaos: 51, fiscal: 66, ibiza: 68, appeal: 74, xp: 650 } },
@@ -17,12 +17,16 @@ const BABYLON_PEOPLE = [
 const BABYLON_EVENTS = [
   { id: 'seed-1', type: 'LEGENDARY', title: 'The 24-hour Ibiza operation', description: 'A brief field visit generated an amount of lore usually reserved for a full fiscal quarter.', location: 'IBIZA', people: ['tibi', 'sven', 'robin'], time: '23 SEP · 05:42', change: '+180 XP', seed: true },
   { id: 'seed-2', type: 'POOL PARTY', title: 'International relations established', description: 'The German connection successfully reached the pool. Diplomatic outcomes remain classified.', location: 'JÁVEA HQ', people: ['philipp', 'ainhoa', 'nerea'], time: '20 SEP · 16:18', change: '+55 AURA', seed: true },
+  { id: 'event-2026-09-19-p-to-the-k-tinder', type: 'RANDOM LORE', title: 'Tinder Incident', description: 'Helped on Robin’s Tinder Chats', location: 'JAVEA HQ', people: ['philipp'], time: '19 SEP · 00:34', change: '+50 XP EACH', seed: true },
+  { id: 'event-2026-09-19-ainhoa-tinder', type: 'SPORT', title: 'Tinder Incident', description: 'Helped on Robin’s Tinder Chats', location: 'JACEA HQ', people: ['ainhoa'], time: '19 SEP · 00:33', change: '+50 XP EACH', seed: true },
+  { id: 'quote-event-2026-09-19-tibi-pussy-jus', type: 'QUOTE', title: '“Elle veut son pussy jus”', description: 'Entered into evidence by TIBI · elle veut son labubu (labubu song).', location: 'QUOTE ARCHIVE', people: ['tibi'], time: '19 SEP · 00:29', change: 'RECORDED', seed: true },
   { id: 'seed-3', type: 'RANDOM LORE', title: 'Single-shoe collection expands', description: 'A swimming shoe has entered the archive. The collection now has two entries and no explanation.', location: 'MOLY PARKING', people: ['sven', 'tibi'], time: '18 SEP · 03:07', change: '+1 SHOE', seed: true }
 ];
 
 const BABYLON_QUOTES = [
   { id: 'quote-1', quote: 'Crazy Ass.', speaker: 'Daniel', context: 'Ordering assistance', time: 'ARCHIVE' },
-  { id: 'quote-2', quote: 'Woisch oldr.', speaker: 'Marvin', context: 'A complete sentence, allegedly', time: 'ARCHIVE' }
+  { id: 'quote-2', quote: 'Woisch oldr.', speaker: 'Marvin', context: 'A complete sentence, allegedly', time: 'ARCHIVE' },
+  { id: 'quote-2026-09-19-tibi-pussy-jus', quote: 'Elle veut son pussy jus', speaker: 'TIBI', context: 'elle veut son labubu (labubu song)', time: '19 SEP · 00:29' }
 ];
 
 const BABYLON_QUESTS = [
@@ -83,7 +87,7 @@ const BABYLON_NPCS = [
 // is added to the project.
 const BABYLON_ARCHIVE = {
   schemaVersion: 1,
-  updatedAt: '2026-09-16T00:00:00.000Z',
+  updatedAt: '2026-09-24T00:00:00.000Z',
   source: 'BABYLON FLOW / CANONICAL LEDGER',
   people: BABYLON_PEOPLE,
   events: BABYLON_EVENTS,
