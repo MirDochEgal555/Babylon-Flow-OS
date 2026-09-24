@@ -149,7 +149,7 @@ function setupAccessGate() {
   if (sessionStorage.getItem('babylon-access') === 'granted') { gate.classList.add('unlocked'); return; }
   $('#gateForm').onsubmit = event => {
     event.preventDefault();
-    if ($('#accessPassword').value === ACCESS_PHRASE) {
+    if ($('#accessPassword').value.trim().toLowerCase() === ACCESS_PHRASE) {
       sessionStorage.setItem('babylon-access', 'granted');
       gate.classList.add('unlocked');
     } else {
