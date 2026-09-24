@@ -16,11 +16,52 @@ const BABYLON_PEOPLE = [
 
 const BABYLON_EVENTS = [
   { id: 'seed-1', type: 'LEGENDARY', title: 'The 24-hour Ibiza operation', description: 'A brief field visit generated an amount of lore usually reserved for a full fiscal quarter.', location: 'IBIZA', people: ['tibi', 'sven', 'robin'], time: '23 SEP · 05:42', change: '+180 XP', seed: true },
+  { id: 'event-2026-09-22-absolute-poroficacion', type: 'LEGENDARY', title: 'Absolute Poroficacion', description: 'The final purification was declared and entered into the record without further explanation.', location: 'JÁVEA HQ', people: ['philipp', 'tibi', 'robin', 'sven'], time: '22 SEP', change: 'CANONIZED', seed: true },
   { id: 'seed-2', type: 'POOL PARTY', title: 'Pool boy encounter', description: 'The old German pool boy made his rounds between Spain life and his free-time shift. Pool condition: immaculate.', location: 'JÁVEA HQ', people: ['philipp', 'ainhoa', 'nerea'], time: '20 SEP · 16:18', change: '+55 AURA', seed: true },
+  { id: 'event-2026-09-19-marmarela-club', type: 'CLUB', title: 'Marmarela Club Night', description: 'The 19 September boat tour continued into a night at Marmarela in Alicante.', location: 'ALICANTE · MARMERELA', people: ['philipp', 'ainhoa', 'tibi', 'luisa', 'robin', 'sven'], time: '19 SEP', change: 'NIGHT LOGGED', seed: true },
+  { id: 'event-2026-09-19-boat-tour', type: 'BEACH', title: 'Boat Tour', description: 'The crew took the boat tour before the Alicante night operation.', location: 'ALICANTE COAST', people: ['philipp', 'ainhoa', 'tibi', 'luisa', 'robin', 'sven'], time: '19 SEP', change: 'VOYAGE LOGGED', seed: true },
   { id: 'event-2026-09-19-p-to-the-k-tinder', type: 'RANDOM LORE', title: 'Tinder Incident', description: 'Helped on Robin’s Tinder Chats', location: 'JAVEA HQ', people: ['philipp'], time: '19 SEP · 00:34', change: '+50 XP EACH', seed: true },
   { id: 'event-2026-09-19-ainhoa-tinder', type: 'SPORT', title: 'Tinder Incident', description: 'Helped on Robin’s Tinder Chats', location: 'JACEA HQ', people: ['ainhoa'], time: '19 SEP · 00:33', change: '+50 XP EACH', seed: true },
+  { id: 'event-2026-09-17-madrid-expedition', type: 'LEGENDARY', title: 'Madrid Expedition', description: 'P to the K, Ainhoa, Tibi and Luul took the Babylon operation to Madrid.', location: 'MADRID', people: ['philipp', 'ainhoa', 'tibi', 'luisa'], time: '17 SEP', change: 'EXPEDITION LOGGED', seed: true },
+  { id: 'event-2026-09-08-our-pool-party', type: 'POOL PARTY', title: 'Our Pool Party', description: 'The home pool party continued into Javea fireworks, Kandhala, skinnydipping and British lore.', location: 'JÁVEA HQ', people: ['philipp', 'ainhoa', 'nico', 'naehwan', 'taeyong', 'daniel', 'robin', 'tibi', 'lex'], time: '08 SEP', change: 'POOL STATUS: LEGENDARY', seed: true },
+  { id: 'event-2026-09-05-brownie-day', type: 'FOOD', title: 'The Brownie Day', description: 'Brownie Day was recorded alongside Tibi going all-in on spicy noodles.', location: 'JÁVEA', people: ['philipp', 'ainhoa', 'nico', 'naehwan', 'taeyong', 'daniel', 'robin', 'tibi', 'lex', 'jan'], time: '05 SEP', change: 'SNACK LORE LOGGED', seed: true },
+  { id: 'event-2026-09-03-denia-pool-party', type: 'POOL PARTY', title: 'The Big Pool Party in Denia', description: 'After the Thursday market, the crew assembled for the big pool party in Denia.', location: 'DENIA', people: ['philipp', 'ainhoa', 'nico', 'naehwan', 'taeyong', 'daniel', 'robin', 'tibi', 'lex', 'jan'], time: '03 SEP', change: 'PARTY LOGGED', seed: true },
+  { id: 'event-2026-08-31-daniel-cockroach', type: 'RANDOM LORE', title: 'Daniel’s Cockroach Incident', description: 'Daniel’s cockroach-cuddling incident was filed after the Valencia trip.', location: 'VALENCIA', people: ['philipp', 'ainhoa', 'nico', 'naehwan', 'taeyong', 'daniel', 'robin', 'jan'], time: '31 AUG', change: 'LORE ESCALATED', seed: true },
+  { id: 'event-2026-08-26-tree-punching', type: 'RANDOM LORE', title: 'P to the K Tree-Punching Incident', description: 'At Moli Night, P to the K entered a tree-punching incident into Babylon history.', location: 'MOLI', people: ['philipp', 'ainhoa', 'nerea', 'marvin', 'ruben'], time: '26 AUG', change: 'INCIDENT FILED', seed: true },
   { id: 'quote-event-2026-09-19-tibi-pussy-jus', type: 'QUOTE', title: '“Elle veut son pussy jus”', description: 'Entered into evidence by TIBI · elle veut son labubu (labubu song).', location: 'QUOTE ARCHIVE', people: ['tibi'], time: '19 SEP · 00:29', change: 'RECORDED', seed: true },
-  { id: 'seed-3', type: 'RANDOM LORE', title: 'Single-shoe collection expands', description: 'A swimming shoe has entered the archive. The collection now has two entries and no explanation.', location: 'MOLY PARKING', people: ['sven', 'tibi'], time: '18 SEP · 03:07', change: '+1 SHOE', seed: true }
+  { id: 'seed-3', type: 'RANDOM LORE', title: 'Single-shoe collection expands', description: 'A suit shoe has entered the archive. The collection now has two entries and no explanation.', location: 'MOLY PARKING', people: ['sven', 'tibi'], time: '18 SEP · 03:07', change: '+1 SHOE', seed: true }
+];
+
+// Mirrors Events.md so the trip diary can be viewed as a dated calendar in
+// the browser. Keep this list in sync when the shared Markdown log changes.
+const BABYLON_CALENDAR_EVENTS = [
+  { date: '2026-08-22', title: 'First Evening Kickoff in Kandhala Club', attendees: 'P to the K, Ainhoa, Nerea, Marvin, Ruben' },
+  { date: '2026-08-26', title: 'Club Nautico / Rich Men Lunch / Moli Night', attendees: 'P to the K, Ainhoa, Nerea, Marvin, Ruben' },
+  { date: '2026-08-27', title: 'First Paraiso Verde Restock Session', attendees: 'Marvin, Ruben, Roger' },
+  { date: '2026-08-28', title: 'Moli Night Again', attendees: 'P to the K, Ainhoa, Nerea, Marvin, Ruben, Nico, Naehwan, Taeyong, Daniel, Roger' },
+  { date: '2026-08-29', title: 'Granadella Beach + Dinner', attendees: 'P to the K, Ainhoa, Nerea, Marvin, Ruben, Nico, Naehwan, Taeyong, Daniel, Roger' },
+  { date: '2026-08-30', title: 'Padel Session v1', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger' },
+  { date: '2026-08-31', title: 'Cockroach Incident (Cuddling) and Valencia Trip', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Jan' },
+  { date: '2026-09-01', title: 'Bous a la Mar and Kandhala with Aaron and Maya', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Jan' },
+  { date: '2026-09-03', title: 'Thursday Market and the Big Pool Party in Denia', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex, Jan' },
+  { date: '2026-09-04', title: 'Azorin Dinner', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex, Jan' },
+  { date: '2026-09-05', title: 'The Brownie Day / Tibi Going for Full Spicy Noodles', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex, Jan' },
+  { date: '2026-09-06', title: 'Benidorm Day and Sunrise', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex, Jan' },
+  { date: '2026-09-07', title: 'Casino Valencia / Fireworks Javea', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex, Jan' },
+  { date: '2026-09-08', title: 'Our Pool Party / Fireworks / Kandhala', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex' },
+  { date: '2026-09-09', title: 'Paella Place Canis', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex' },
+  { date: '2026-09-10', title: 'Padel Session v2', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex' },
+  { date: '2026-09-11', title: 'Arrival Sven Wacker / Alicante Magma Club Session', attendees: 'P to the K, Ainhoa, Nerea, Nico, Naehwan, Taeyong, Daniel, Roger, Tibi, Lex, WaggerBagger' },
+  { date: '2026-09-13', title: 'The Ibiza 24h Day', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Roger, Tibi, Lex, WaggerBagger' },
+  { date: '2026-09-14', title: 'Lighthouse Expedition', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Roger, Tibi, Lex, WaggerBagger, Daniel' },
+  { date: '2026-09-15', title: 'Albufeira Paella / Arenal Beach Session', attendees: 'P to the K, Ainhoa, Nico, Naehwan, Taeyong, Roger, Tibi, WaggerBagger' },
+  { date: '2026-09-17', title: 'Madrid Expedition', attendees: 'P to the K, Ainhoa, Tibi, Luul' },
+  { date: '2026-09-18', title: 'Bar Imperial / Kandhala', attendees: 'P to the K, Ainhoa, Tibi, Luul, Roger, WaggerBagger' },
+  { date: '2026-09-19', title: 'Boat Tour / Alicante Marmarela Night', attendees: 'P to the K, Ainhoa, Tibi, Luul, Roger, WaggerBagger' },
+  { date: '2026-09-20', title: 'Karaoke', attendees: 'P to the K, Ainhoa, Tibi, Roger, WaggerBagger' },
+  { date: '2026-09-21', title: 'Dates', attendees: 'P to the K, Ainhoa, Tibi, Roger' },
+  { date: '2026-09-22', title: 'Absolute Poroficacion', attendees: 'P to the K, Tibi, Roger, WaggerBagger' },
+  { date: '2026-09-23', title: 'Flight Home', attendees: 'P to the K, Ainhoa, Tibi, Roger, WaggerBagger' }
 ];
 
 const BABYLON_QUOTES = [
