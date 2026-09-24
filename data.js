@@ -6,17 +6,17 @@ const BABYLON_PEOPLE = [
   { id: 'luisa', name: 'Luisa', alias: 'LUUL', animal: 'STAR', accent: 'blue', stock: 111.3, stats: { aura: 73, reliability: 71, spanish: 62, chaos: 51, fiscal: 66, ibiza: 68, appeal: 74, xp: 650 } },
   { id: 'sven', name: 'Sven', alias: 'WAGGERBAGGER', animal: 'ELEPHANT', accent: 'yellow', stock: 84.6, stats: { aura: 59, reliability: 38, spanish: 36, chaos: 86, fiscal: 31, ibiza: 75, appeal: 57, xp: 890 } },
   { id: 'robin', name: 'Robin', alias: 'ROGER', animal: 'LION', accent: 'red', stock: 107.9, stats: { aura: 77, reliability: 51, spanish: 57, chaos: 72, fiscal: 45, ibiza: 80, appeal: 82, xp: 810 } },
-  { id: 'marvin', name: 'Marvin', alias: 'MARVIN', animal: 'UNCLASSIFIED', accent: 'blue', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
-  { id: 'ruben', name: 'Ruben', alias: 'RUBEN', animal: 'UNCLASSIFIED', accent: 'pink', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
-  { id: 'jan', name: 'Jan', alias: 'JAN', animal: 'UNCLASSIFIED', accent: 'orange', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
-  { id: 'nico', name: 'Nico', alias: 'NICO', animal: 'UNCLASSIFIED', accent: 'lime', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
-  { id: 'taeyong', name: 'Taeyong', alias: 'TAEYONG', animal: 'UNCLASSIFIED', accent: 'blue', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } },
-  { id: 'naehwan', name: 'Naehwan', alias: 'NAEHWAN', animal: 'UNCLASSIFIED', accent: 'pink', status: 'inactive', stock: 0, stats: { aura: 0, reliability: 0, spanish: 0, chaos: 0, fiscal: 0, ibiza: 0, appeal: 0, xp: 0 } }
+  { id: 'marvin', name: 'Marvin', alias: 'MARVIN', animal: 'WOLF', accent: 'blue', stock: 103.6, stats: { aura: 69, reliability: 58, spanish: 44, chaos: 73, fiscal: 52, ibiza: 76, appeal: 70, xp: 720 } },
+  { id: 'ruben', name: 'Ruben', alias: 'RUBEN', animal: 'FALCON', accent: 'pink', stock: 115.2, stats: { aura: 75, reliability: 67, spanish: 82, chaos: 55, fiscal: 64, ibiza: 69, appeal: 77, xp: 780 } },
+  { id: 'jan', name: 'Jan', alias: 'JAN', animal: 'OTTER', accent: 'orange', stock: 98.4, stats: { aura: 66, reliability: 62, spanish: 53, chaos: 64, fiscal: 59, ibiza: 72, appeal: 68, xp: 690 } },
+  { id: 'nico', name: 'Nico', alias: 'NICO', animal: 'GECKO', accent: 'lime', stock: 109.8, stats: { aura: 71, reliability: 56, spanish: 71, chaos: 67, fiscal: 48, ibiza: 77, appeal: 74, xp: 750 } },
+  { id: 'taeyong', name: 'Taeyong', alias: 'TAEYONG', animal: 'TIGER', accent: 'blue', stock: 122.6, stats: { aura: 79, reliability: 65, spanish: 59, chaos: 61, fiscal: 57, ibiza: 74, appeal: 81, xp: 840 } },
+  { id: 'naehwan', name: 'Naehwan', alias: 'NAEHWAN', animal: 'PANDA', accent: 'pink', stock: 105.1, stats: { aura: 72, reliability: 69, spanish: 51, chaos: 58, fiscal: 63, ibiza: 70, appeal: 73, xp: 730 } }
 ];
 
 const BABYLON_EVENTS = [
   { id: 'seed-1', type: 'LEGENDARY', title: 'The 24-hour Ibiza operation', description: 'A brief field visit generated an amount of lore usually reserved for a full fiscal quarter.', location: 'IBIZA', people: ['tibi', 'sven', 'robin'], time: '23 SEP · 05:42', change: '+180 XP', seed: true },
-  { id: 'seed-2', type: 'POOL PARTY', title: 'International relations established', description: 'The German connection successfully reached the pool. Diplomatic outcomes remain classified.', location: 'JÁVEA HQ', people: ['philipp', 'ainhoa', 'nerea'], time: '20 SEP · 16:18', change: '+55 AURA', seed: true },
+  { id: 'seed-2', type: 'POOL PARTY', title: 'Pool boy encounter', description: 'The old German pool boy made his rounds between Spain life and his free-time shift. Pool condition: immaculate.', location: 'JÁVEA HQ', people: ['philipp', 'ainhoa', 'nerea'], time: '20 SEP · 16:18', change: '+55 AURA', seed: true },
   { id: 'event-2026-09-19-p-to-the-k-tinder', type: 'RANDOM LORE', title: 'Tinder Incident', description: 'Helped on Robin’s Tinder Chats', location: 'JAVEA HQ', people: ['philipp'], time: '19 SEP · 00:34', change: '+50 XP EACH', seed: true },
   { id: 'event-2026-09-19-ainhoa-tinder', type: 'SPORT', title: 'Tinder Incident', description: 'Helped on Robin’s Tinder Chats', location: 'JACEA HQ', people: ['ainhoa'], time: '19 SEP · 00:33', change: '+50 XP EACH', seed: true },
   { id: 'quote-event-2026-09-19-tibi-pussy-jus', type: 'QUOTE', title: '“Elle veut son pussy jus”', description: 'Entered into evidence by TIBI · elle veut son labubu (labubu song).', location: 'QUOTE ARCHIVE', people: ['tibi'], time: '19 SEP · 00:29', change: 'RECORDED', seed: true },
@@ -79,7 +79,7 @@ const BABYLON_DUOS = [
 ];
 
 const BABYLON_NPCS = [
-  { id: 'npc-seed-1', nickname: 'The Pool Boy', nationality: 'GERMAN / 60 YEARS OLD', where: 'JÁVEA HQ POOL', danger: 'LOW / EARLY SHIFT', lore: 'Cleans the pool every Tuesday and Saturday before sunrise. Nobody has seen him because everyone is still asleep.', quest: 'Wake up early enough to verify the legend.', odds: '100% / TUESDAY + SATURDAY' }
+  { id: 'npc-seed-1', nickname: 'The Pool Boy', nationality: 'OLD GERMAN / LIVES IN SPAIN', where: 'JÁVEA HQ POOL', danger: 'LOW / EARLY SHIFT', lore: 'An old German who now lives in Spain and cleans the pool for fun in his free time. He arrives before sunrise; the pool is always immaculate and the group is always asleep.', quest: 'Wake up early enough to thank him for the immaculate pool.', odds: '100% / TUESDAY + SATURDAY' }
 ];
 
 // Add JPEGs or PNGs to /photos, then list them here to publish them in the shared
@@ -116,7 +116,7 @@ const BABYLON_PHOTOS = [
   { src: 'photos/teaparty.jpeg', caption: 'British Royalty Tea Party', addedAt: '23 SEP 2026' },
   { src: 'photos/paella.jpeg', caption: 'Spanish Revolucion', addedAt: '23 SEP 2026' },
   { src: 'photos/poolpartyflyer.jpeg', caption: 'Pool Party Invite', addedAt: '23 SEP 2026' },
-  { src: 'photos/roaster.jpeg', caption: 'Full Roaster', addedAt: '23 SEP 2026' },
+  { src: 'photos/roaster.jpeg', caption: 'Full Roster', addedAt: '23 SEP 2026' },
   { src: 'photos/svenbarker.jpeg', caption: 'DJ Sven Barker', addedAt: '23 SEP 2026' },
 ];
 
@@ -125,7 +125,7 @@ const BABYLON_PHOTOS = [
 // corrections remain subject to HQ review.
 const BABYLON_ARCHIVE = {
   schemaVersion: 2,
-  canonicalRevision: 3,
+  canonicalRevision: 4,
   ledgerPatches: {
     2: { xp: { philipp: 50, ainhoa: 50 } }
   },

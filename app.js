@@ -17,7 +17,7 @@ function normalisePerson(person, fallback) {
     ...fallback,
     name: cleanText(person?.name, fallback.name, 60), alias: cleanText(person?.alias, fallback.alias, 60), animal: cleanText(person?.animal, fallback.animal, 60),
     accent: ['lime', 'pink', 'violet', 'orange', 'blue', 'yellow', 'red'].includes(person?.accent) ? person.accent : fallback.accent,
-    status: person?.status ? (person.status === 'inactive' ? 'inactive' : 'active') : (fallback.status || 'active'), stock: cleanNumber(person?.stock, fallback.stock, 0, 1000000),
+    stock: cleanNumber(person?.stock, fallback.stock, 0, 1000000),
     stats: Object.fromEntries(Object.entries(fallback.stats).map(([key, value]) => [key, cleanNumber(stats[key], value, 0, key === 'xp' ? 10000000 : 100)]))
   };
 }
@@ -53,6 +53,12 @@ function refreshCanonicalArchive(archive) {
   ];
 
   for (let revision = appliedRevision + 1; revision <= targetRevision; revision += 1) {
+    if (revision === 4) {
+      // Vacation is over: everyone belongs to one completed roster. Replace the
+      // former zeroed placeholders and refresh the canonical pool-boy NPC.
+      archive.people = clone(BABYLON_PEOPLE);
+      archive.npcs = clone(BABYLON_NPCS);
+    }
     const xpChanges = BABYLON_ARCHIVE.ledgerPatches?.[revision]?.xp || {};
     for (const [personId, xp] of Object.entries(xpChanges)) {
       const person = archive.people?.find(candidate => candidate.id === personId);
@@ -78,7 +84,6 @@ const photoStore = {
   async remove(id) { const db = await archiveDB.open(); return new Promise((resolve, reject) => { const request = db.transaction('photos', 'readwrite').objectStore('photos').delete(id); request.onsuccess = () => resolve(); request.onerror = () => reject(request.error); }); }
 };
 let people = [], events = [], quotes = [], npcs = [], morningReports = [], duoHistory = [], auditLog = [], photos = [], photoUrls = [], quoteQuiz = { correct: 0, total: 0 };
-let rosterFilter = 'active';
 let archiveReady = false;
 let undoSnapshot = null;
 function currentArchive() { return { schemaVersion: ARCHIVE_SCHEMA_VERSION, canonicalRevision: BABYLON_ARCHIVE.canonicalRevision, updatedAt: new Date().toISOString(), source: BABYLON_ARCHIVE.source, trip: BABYLON_ARCHIVE.trip, people, events, quotes, npcs, morningReports, duoHistory, auditLog, quoteQuiz }; }
@@ -108,8 +113,7 @@ let activeModal = null;
 const $ = (s) => document.querySelector(s);
 const initials = (name) => name.split(' ').map(x => x[0]).join('').slice(0,2);
 const title = (id) => people.find(p => p.id === id)?.alias || id;
-const personStatus = (person) => person.status === 'inactive' ? 'inactive' : 'active';
-const activePeople = () => people.filter(person => personStatus(person) === 'active');
+const activePeople = () => people;
 const ACCESS_PHRASE = 'babylon2026';
 const LOG_EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/rogee.oc@gmail.com';
 
@@ -156,12 +160,9 @@ function setupAccessGate() {
 }
 
 function renderPeople() {
-  const rosterPeople = people.filter(person => personStatus(person) === rosterFilter);
-  $('#rosterTitle').textContent = rosterFilter === 'active' ? 'FINAL ASSETS' : 'INACTIVE ASSETS';
-  $('#viewAll').innerHTML = rosterFilter === 'active' ? 'VIEW INACTIVE <span>→</span>' : 'VIEW ACTIVE <span>→</span>';
-  $('#peopleGrid').innerHTML = rosterPeople.map(p => `
+  $('#rosterTitle').textContent = 'FULL ROSTER';
+  $('#peopleGrid').innerHTML = people.map(p => `
     <article class="person-card" style="--person:var(--${p.accent})" data-person="${escapeHTML(p.id)}" title="Open ${escapeHTML(p.name)}'s asset profile">
-      <span class="person-status ${personStatus(p)}">${personStatus(p)}</span>
       <div class="avatar">${escapeHTML(initials(p.alias))}</div><span class="animal">${escapeHTML(p.animal)} CLASS</span>
       <h3>${escapeHTML(p.alias)}</h3><div class="name">${escapeHTML(p.name).toUpperCase()} · €${Number(p.stock).toFixed(1)}</div>
       <div class="bars">
@@ -267,7 +268,6 @@ function eventModal() { openModal(`<h2 id="modalTitle">ADD LATE MEMORY</h2><p cl
 
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>({event:eventModal,quote:quoteModal,quoteQuiz:quoteQuizModal,quest:questModal,court:courtModal,wheel:wheelModal,exchange:exchangeModal,npc:npcModal,var:varModal,lore:loreModal,duo:duoModal,morning:morningModal,wrapped:wrappedModal,album:photoAlbumModal}[b.dataset.open]()));
 $('#closeModal').onclick=closeModal; $('#backdrop').onclick=closeModal; document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-$('#viewAll').onclick=()=>{ rosterFilter = rosterFilter === 'active' ? 'inactive' : 'active'; renderPeople(); document.querySelector('.people-grid').scrollIntoView({behavior:'smooth',block:'start'}); toast(`${rosterFilter.toUpperCase()} ROSTER DISPLAYED`); };
 $('#requestChange').onclick=()=>changeRequestModal();
 $('#undoLast').onclick=undoLastChange;
 function archiveModal() {
