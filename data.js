@@ -24,9 +24,9 @@ const BABYLON_EVENTS = [
 ];
 
 const BABYLON_QUOTES = [
+  { id: 'quote-2026-09-19-tibi-pussy-jus', quote: 'Elle veut son pussy jus', speaker: 'TIBI', context: 'elle veut son labubu (labubu song)', time: '19 SEP · 00:29' },
   { id: 'quote-1', quote: 'Crazy Ass.', speaker: 'Daniel', context: 'Ordering assistance', time: 'ARCHIVE' },
-  { id: 'quote-2', quote: 'Woisch oldr.', speaker: 'Marvin', context: 'A complete sentence, allegedly', time: 'ARCHIVE' },
-  { id: 'quote-2026-09-19-tibi-pussy-jus', quote: 'Elle veut son pussy jus', speaker: 'TIBI', context: 'elle veut son labubu (labubu song)', time: '19 SEP · 00:29' }
+  { id: 'quote-2', quote: 'Woisch oldr.', speaker: 'Marvin', context: 'A complete sentence, allegedly', time: 'ARCHIVE' }
 ];
 
 const BABYLON_QUESTS = [
@@ -87,6 +87,10 @@ const BABYLON_NPCS = [
 // is added to the project.
 const BABYLON_ARCHIVE = {
   schemaVersion: 1,
+  canonicalRevision: 2,
+  ledgerPatches: {
+    2: { xp: { philipp: 50, ainhoa: 50 } }
+  },
   updatedAt: '2026-09-24T00:00:00.000Z',
   source: 'BABYLON FLOW / CANONICAL LEDGER',
   people: BABYLON_PEOPLE,

@@ -31,6 +31,33 @@ function migrateArchive(data) {
     archive.updatedAt ||= new Date().toISOString();
     archive.source ||= 'BABYLON FLOW / IMPORTED ARCHIVE';
   }
+  return refreshCanonicalArchive(archive);
+}
+function refreshCanonicalArchive(archive) {
+  const targetRevision = cleanNumber(BABYLON_ARCHIVE.canonicalRevision, 1, 1, 1000000);
+  const appliedRevision = cleanNumber(archive.canonicalRevision, 1, 1, targetRevision);
+  if (appliedRevision >= targetRevision) return archive;
+
+  // Canonical entries replace only prior seeded entries; browser-local lore stays intact.
+  archive.events = [
+    ...(archive.events || []).filter(event => !event.seed),
+    ...clone(BABYLON_EVENTS)
+  ];
+  const canonicalQuoteIds = new Set(BABYLON_QUOTES.map(quote => String(quote.id)));
+  archive.quotes = [
+    ...(archive.quotes || []).filter(quote => !canonicalQuoteIds.has(String(quote.id))),
+    ...clone(BABYLON_QUOTES)
+  ];
+
+  for (let revision = appliedRevision + 1; revision <= targetRevision; revision += 1) {
+    const xpChanges = BABYLON_ARCHIVE.ledgerPatches?.[revision]?.xp || {};
+    for (const [personId, xp] of Object.entries(xpChanges)) {
+      const person = archive.people?.find(candidate => candidate.id === personId);
+      if (person?.stats) person.stats.xp = cleanNumber(person.stats.xp, 0, 0, 10000000) + cleanNumber(xp, 0, -10000000, 10000000);
+    }
+  }
+  archive.canonicalRevision = targetRevision;
+  archive.updatedAt = BABYLON_ARCHIVE.updatedAt;
   return archive;
 }
 const legacyStore = {
@@ -46,7 +73,7 @@ let people = [], events = [], quotes = [], npcs = [], morningReports = [], duoHi
 let rosterFilter = 'active';
 let archiveReady = false;
 let undoSnapshot = null;
-function currentArchive() { return { schemaVersion: ARCHIVE_SCHEMA_VERSION, updatedAt: new Date().toISOString(), source: BABYLON_ARCHIVE.source, people, events, quotes, npcs, morningReports, duoHistory, auditLog, quoteQuiz }; }
+function currentArchive() { return { schemaVersion: ARCHIVE_SCHEMA_VERSION, canonicalRevision: BABYLON_ARCHIVE.canonicalRevision, updatedAt: new Date().toISOString(), source: BABYLON_ARCHIVE.source, people, events, quotes, npcs, morningReports, duoHistory, auditLog, quoteQuiz }; }
 function applyArchive(data) { const fallback = canonicalArchive(); const savedPeople = data.people || fallback.people; people = fallback.people.map(person => normalisePerson(savedPeople.find(saved => saved.id === person.id), person)); events = data.events || fallback.events; quotes = data.quotes || fallback.quotes; npcs = data.npcs || fallback.npcs; morningReports = data.morningReports || []; duoHistory = data.duoHistory || []; auditLog = data.auditLog || []; quoteQuiz = { correct: cleanNumber(data.quoteQuiz?.correct, 0, 0, 1000000), total: cleanNumber(data.quoteQuiz?.total, 0, 0, 1000000) }; }
 function addAudit(action, detail = '') { auditLog.unshift({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, at: new Date().toISOString(), action, detail }); auditLog = auditLog.slice(0, 500); }
 async function loadArchive() {
@@ -61,7 +88,11 @@ async function loadArchive() {
     }
     try { await archiveDB.set(archive); } catch { legacyStore.set('archive-fallback', archive); }
   }
-  try { applyArchive(migrateArchive(archive)); } catch { applyArchive(canonicalArchive()); }
+  try {
+    const refreshed = migrateArchive(archive);
+    applyArchive(refreshed);
+    try { await archiveDB.set(currentArchive()); } catch { legacyStore.set('archive-fallback', currentArchive()); }
+  } catch { applyArchive(canonicalArchive()); }
   archiveReady = true; renderPeople(); renderMarket(); renderTimeline();
 }
 let activeModal = null;
