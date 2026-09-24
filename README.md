@@ -13,6 +13,14 @@ checked-in `BABYLON_ARCHIVE` in `data.js` is the canonical deployment ledger;
 add forwarded email reports there before the next GitHub Pages deployment so
 they become the shared baseline for everybody.
 
+## Photo album
+
+Put shared JPEGs or PNGs in [`photos/`](photos/README.md) and add their filenames to
+`BABYLON_PHOTOS` in `data.js`; those images ship with the site and are visible
+to everyone after deployment. **PHOTO ALBUM** also supports browser-local JPEG
+uploads (up to 200 images, 12 MB each), which are not included in JSON archive
+exports.
+
 The exact review and publication procedure is in
 [HQ_REVIEW_WORKFLOW.md](HQ_REVIEW_WORKFLOW.md).
 

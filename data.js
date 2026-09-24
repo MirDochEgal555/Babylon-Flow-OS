@@ -82,17 +82,56 @@ const BABYLON_NPCS = [
   { id: 'npc-seed-1', nickname: 'The Pool Boy', nationality: 'GERMAN / 60 YEARS OLD', where: 'JÁVEA HQ POOL', danger: 'LOW / EARLY SHIFT', lore: 'Cleans the pool every Tuesday and Saturday before sunrise. Nobody has seen him because everyone is still asleep.', quest: 'Wake up early enough to verify the legend.', odds: '100% / TUESDAY + SATURDAY' }
 ];
 
-// Checked-in master record. This is deliberately separate from the browser
-// archive: it is the portable baseline we update when an emailed field report
-// is added to the project.
+// Add JPEGs or PNGs to /photos, then list them here to publish them in the shared
+// album. Browser-uploaded images remain local to the device.
+const BABYLON_PHOTOS = [
+  // { src: 'photos/ibiza-001.jpg', caption: 'Ibiza survival evidence', addedAt: '23 SEP 2026' }
+  { src: 'photos/babylonflow.PNG', caption: 'OG Babylon Flow', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv0.jpeg', caption: 'Babylon Flow v0', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv1.jpeg', caption: 'Babylon Flow v1', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv2.PNG', caption: 'Babylon Flow v2', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv3.jpeg', caption: 'Babylon Flow v3', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv4.jpeg', caption: 'Babylon Flow v4', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv5.jpeg', caption: 'Babylon Flow v5', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv5x2.jpeg', caption: 'Babylon Flow v5x2', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv6.jpeg', caption: 'Babylon Flow v6', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv7.jpeg', caption: 'Babylon Flow v7', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv8.jpeg', caption: 'Babylon Flow v8', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv9.jpeg', caption: 'Babylon Flow v9', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv10.jpeg', caption: 'Babylon Flow v10', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv11.jpeg', caption: 'Babylon Flow v11', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv12.jpeg', caption: 'Babylon Flow v12', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv13.jpeg', caption: 'Babylon Flow v13', addedAt: '23 SEP 2026' },
+  { src: 'photos/babylonflowv14v15.jpeg', caption: 'Babylon Flow v14+v15', addedAt: '23 SEP 2026' },
+  { src: 'photos/benidorm.jpeg', caption: 'Benidorm Club', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-001.jpeg', caption: 'Javea Journal - Page 1', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-002.jpeg', caption: 'Javea Journal - Page 2', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-003.jpeg', caption: 'Javea Journal - Page 3', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-004.jpeg', caption: 'Javea Journal - Page 4', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-005.jpeg', caption: 'Javea Journal - Page 5', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-006.jpeg', caption: 'Javea Journal - Page 6', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-007.jpeg', caption: 'Javea Journal - Page 7', addedAt: '23 SEP 2026' },
+  { src: 'photos/javeajournal-008.jpeg', caption: 'Javea Journal - Page 8', addedAt: '23 SEP 2026' },
+  { src: 'photos/manu.jpeg', caption: 'Manchester United Fans', addedAt: '23 SEP 2026' },
+  { src: 'photos/teaparty.jpeg', caption: 'British Royalty Tea Party', addedAt: '23 SEP 2026' },
+  { src: 'photos/paella.jpeg', caption: 'Spanish Revolucion', addedAt: '23 SEP 2026' },
+  { src: 'photos/poolpartyflyer.jpeg', caption: 'Pool Party Invite', addedAt: '23 SEP 2026' },
+  { src: 'photos/roaster.jpeg', caption: 'Full Roaster', addedAt: '23 SEP 2026' },
+  { src: 'photos/svenbarker.jpeg', caption: 'DJ Sven Barker', addedAt: '23 SEP 2026' },
+];
+
+// Checked-in master record. España 2026 concluded on 23 September; this is
+// the final baseline. Late memories may be added, while stat and market
+// corrections remain subject to HQ review.
 const BABYLON_ARCHIVE = {
-  schemaVersion: 1,
-  canonicalRevision: 2,
+  schemaVersion: 2,
+  canonicalRevision: 3,
   ledgerPatches: {
     2: { xp: { philipp: 50, ainhoa: 50 } }
   },
   updatedAt: '2026-09-24T00:00:00.000Z',
-  source: 'BABYLON FLOW / CANONICAL LEDGER',
+  source: 'BABYLON FLOW / FINAL CANONICAL LEDGER',
+  trip: { status: 'concluded', concludedAt: '2026-09-23', label: 'ESPAÑA 2026' },
   people: BABYLON_PEOPLE,
   events: BABYLON_EVENTS,
   quotes: BABYLON_QUOTES,
