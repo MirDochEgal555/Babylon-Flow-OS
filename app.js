@@ -36,9 +36,9 @@ function migrateArchive(data) {
 function refreshCanonicalArchive(archive) {
   const targetRevision = cleanNumber(BABYLON_ARCHIVE.canonicalRevision, 1, 1, 1000000);
   const appliedRevision = cleanNumber(archive.canonicalRevision, 1, 1, targetRevision);
-  if (appliedRevision >= targetRevision) return archive;
 
-  // Canonical entries replace only prior seeded entries; browser-local lore stays intact.
+  // Verify canonical entries on every load; browser-local lore stays intact.
+  // Revision-gated patches below prevent people stats from being applied twice.
   archive.events = [
     ...(archive.events || []).filter(event => !event.seed),
     ...clone(BABYLON_EVENTS)
